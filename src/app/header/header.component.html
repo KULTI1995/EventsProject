@@ -1,0 +1,28 @@
+<mat-toolbar>
+
+  <div>
+    <img style="width:4em; height:4em;" src="assets/logo.png">
+  </div>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="fill-remaining-space"></span>
+
+  <div class="userDisplay" *ngIf="auth.afAuth.user | async as user; else dontLogged">
+   <button routerLink="/" mat-button>Home</button>
+    <img [src]="user.photoURL">
+    <button mat-raised-button color="primary" [matMenuTriggerFor]="appMenu">{{( this.isHandset$ | async )? user.displayName.split(' ')[0]: user.displayName}}</button>
+    <mat-menu #appMenu="matMenu">
+      <ng-template matMenuContent let-name="name">
+        <button routerLink="/account/addevent" mat-menu-item>Add event</button>
+        <button *ngIf="eventsService.userEvents | async" routerLink="/account/eventslist" mat-menu-item>My events</button>
+        <button routerLink="/account/settings" mat-menu-item>Settings</button>
+        <button (click)="auth.logout()" mat-menu-item>Log off {{auth.user.displayName}}</button>
+      </ng-template>
+    </mat-menu>
+  </div>
+
+  <ng-template #dontLogged>
+    <button mat-button routerLink="">Home</button>
+    <button mat-button (click)="auth.loginViaFacebook()">Login with Facebook</button>
+  </ng-template>
+</mat-toolbar>

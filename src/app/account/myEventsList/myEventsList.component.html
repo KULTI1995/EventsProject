@@ -1,0 +1,9 @@
+<mat-list *ngIf="eventsService.userEvents | async">
+    <h3 mat-subheader>My events list</h3>
+    <mat-list-item *ngFor="let event of eventsService.userEvents | async">
+        <mat-icon  matTooltip="Delete this event" matTooltipPosition="below" style="cursor:pointer;" (click)="eventsService.deleteEvent(event)" mat-list-icon>clear</mat-icon>
+      <h4 mat-line>{{ event.title }}</h4>
+      <p mat-line> {{ event.shortDescription }} </p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>

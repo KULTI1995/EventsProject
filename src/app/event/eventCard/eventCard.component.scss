@@ -1,0 +1,29 @@
+.card {
+  margin: auto;
+  max-width: 70vw;
+  font-size: 0.7rem;
+}
+
+.extras {
+  display: flex;
+  flex-flow: column;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  color: #333738;
+  div {
+    display: inline-flex;
+    * {
+      align-self: center;
+    }
+  }
+}
+
+ngb-carousel {
+  width:100%;
+  margin:0;
+  padding:0;
+  img {
+    width: 100%;
+  }
+}

@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="form-group">
+      <mat-form-field class="example-form-field">
+          <input matInput placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
+      #search [formControl]="searchControl">
+          <button matTooltip="detect my location" matTooltipPosition="above" mat-button matSuffix mat-icon-button aria-label="Clear" (click)="setCurrentPosition($event)">
+            <mat-icon>home</mat-icon>
+          </button>
+        </mat-form-field>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<mat-toolbar>
+  <span>Account</span>
+</mat-toolbar>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Personal data
+      </mat-panel-title>
+      <mat-panel-description>
+        Type your name and age
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input matInput placeholder="First name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Age">
+    </mat-form-field>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-toolbar>
+  <span>display settings</span>
+</mat-toolbar>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        search diameter
+      </mat-panel-title>
+      <mat-panel-description>
+        <span>Set the display distance of events.</span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-slider thumbLabel [displayWith]="formatDistance" tickInterval="1" min="1" max="100"></mat-slider>
+
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        PushNotifications switcher
+      </mat-panel-title>
+      <mat-panel-description>
+        ON/OFF push notifications
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-slide-toggle>Slide me!</mat-slide-toggle>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,17 @@
+<mat-card *ngIf="event" class="card">
+  <mat-card-header>
+    <mat-card-title>{{ event.title }}</mat-card-title>
+    <mat-card-subtitle>{{ event.category }}</mat-card-subtitle>
+  </mat-card-header>
+<div *ngIf="event.images.length>1; else ontImage">
+  <ngb-carousel>
+    <ng-template *ngFor="let image of event.images" ngbSlide  >
+      <img [src]="image" alt="{{image}}">
+    </ng-template>
+  </ngb-carousel>
+</div>
+  <ng-template #ontImage><img mat-card-image [lazyLoad]="event.images[0]" alt="First image of event"></ng-template>
+  <mat-card-content>
+    <p style="max-width:100%;" [innerHTML]="assembleHTMLItem()"> </p>
+  </mat-card-content>
+</mat-card>

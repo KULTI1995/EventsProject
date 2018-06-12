@@ -18,7 +18,6 @@
     "forin": true,
     "import-blacklist": [
       true,
-      "rxjs",
       "rxjs/Rx"
     ],
     "import-spacing": true,
@@ -127,7 +126,8 @@
       true,
       "element",
       "app",
-      "kebab-case"
+      "kebab-case",
+      "camelCase"
     ],
     "no-output-on-prefix": true,
     "use-input-property-decorator": true,

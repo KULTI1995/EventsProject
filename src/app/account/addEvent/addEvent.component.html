@@ -1,0 +1,155 @@
+<div *ngIf="!sitehelper.matSteeperPosition">
+  <mat-horizontal-stepper [linear]="true" #stepper>
+      <mat-step [stepControl]="firstFormGroup" editable=false>
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Base Information</ng-template>
+            <mat-form-field class="fieldFormAlign">
+              <input matInput formControlName="title" placeholder="Title your event..." required>
+            </mat-form-field>
+            <mat-form-field class="fieldFormAlign">
+              <textarea #description matInput [froalaEditor] formControlName="description" required></textarea>
+            </mat-form-field>
+
+
+            <mat-form-field class="fieldFormAlign">
+              <input class="form-control" matInput formControlName="shortDescription" placeholder="short description" required>
+              <app-generateShort matSuffix (short)="shortDescriptionGenerate($event)" [shortText]="firstFormGroup.get('description').value"></app-generateShort>
+            </mat-form-field>
+
+            <div>
+              <button mat-button matStepperNext>Next</button>
+              <!-- <button (click)="onSubmit()" mat-button matStepperNext>show me info</button> -->
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" editable=false>
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>additional information</ng-template>
+            <app-location (LocationChange)="onLOcationChange($event)"></app-location>
+            <image-upload (removed)="onRemovedImage($event)" (uploadFinished)="onUploadFinished($event)" url="https://api.imgur.com/3/image"
+              [headers]="myHeaders"></image-upload>
+            <form [formGroup]="dateFormGroup">
+              <mat-form-field>
+                <input [min]="toDayDate" matInput [matDatepicker]="picker1" placeholder="start date" formControlName="start">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                <input [min]="toDayDate" [matDatepickerFilter]="minFilter" matInput [matDatepicker]="picker2" placeholder="end date" formControlName="end">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </form>
+
+            <mat-form-field>
+                <mat-select placeholder="Category" formControlName="category" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let category of ['IT', 'Design', 'UX']" [value]="category">
+                    {{category}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="secondFormGroup.get('category').hasError('required')">Please choose an animal</mat-error>
+              </mat-form-field>
+
+            <div>
+              <!-- <button mat-button matStepperPrevious>Back</button> -->
+              <button mat-button (click)="finnaly=true;" matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Summary</ng-template>
+          <mat-toolbar>
+              <span style="margin:auto;">check the data</span>
+          </mat-toolbar>
+          <div *ngIf="finnaly">
+            <!-- <p *ngFor="let x of objectKeys(SummaryEvent())">
+              {{x + ' : ' + (SummaryEvent()[x] | json)}}
+            </p> -->
+            <app-summary [data]="SummaryEvent()"></app-summary>
+          </div>
+          <div>
+            <button mat-button (click)="addEvent(stepper)">Add this event</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+  </mat-horizontal-stepper>
+</div>
+
+<div *ngIf="sitehelper.matSteeperPosition">
+  <mat-vertical-stepper [linear]="true" #stepper>
+      <mat-step [stepControl]="firstFormGroup" editable=false>
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Base Information</ng-template>
+            <mat-form-field class="fieldFormAlign">
+              <input matInput formControlName="title" placeholder="Title your event..." required>
+            </mat-form-field>
+            <mat-form-field class="fieldFormAlign">
+              <textarea #description matInput [froalaEditor] formControlName="description" required></textarea>
+            </mat-form-field>
+
+
+            <mat-form-field class="fieldFormAlign">
+              <input class="form-control" matInput formControlName="shortDescription" placeholder="short description" required>
+              <app-generateShort matSuffix (short)="shortDescriptionGenerate($event)" [shortText]="firstFormGroup.get('description').value"></app-generateShort>
+            </mat-form-field>
+
+            <div>
+              <button mat-button matStepperNext>Next</button>
+              <!-- <button (click)="onSubmit()" mat-button matStepperNext>show me info</button> -->
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" editable=false>
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>additional information</ng-template>
+            <app-location (LocationChange)="onLOcationChange($event)"></app-location>
+            <image-upload (removed)="onRemovedImage($event)" (uploadFinished)="onUploadFinished($event)" url="https://api.imgur.com/3/image"
+              [headers]="myHeaders"></image-upload>
+            <form [formGroup]="dateFormGroup">
+              <mat-form-field>
+                <input [min]="toDayDate" matInput [matDatepicker]="picker1" placeholder="start date" formControlName="start">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                <input [min]="toDayDate" [matDatepickerFilter]="minFilter" matInput [matDatepicker]="picker2" placeholder="end date" formControlName="end">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </form>
+
+            <mat-form-field>
+                <mat-select placeholder="Category" formControlName="category" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let category of ['IT', 'Design', 'UX']" [value]="category">
+                    {{category}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="secondFormGroup.get('category').hasError('required')">Please choose an animal</mat-error>
+              </mat-form-field>
+
+            <div>
+              <!-- <button mat-button matStepperPrevious>Back</button> -->
+              <button mat-button (click)="finnaly=true;" matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Summary</ng-template>
+          <mat-toolbar>
+              <span style="margin:auto;">check the data</span>
+          </mat-toolbar>
+          <div *ngIf="finnaly">
+            <!-- <p *ngFor="let x of objectKeys(SummaryEvent())">
+              {{x + ' : ' + (SummaryEvent()[x] | json)}}
+            </p> -->
+            <app-summary [data]="SummaryEvent()"></app-summary>
+          </div>
+          <div>
+            <button mat-button (click)="addEvent(stepper)">Add this event</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+  </mat-vertical-stepper>
+</div>

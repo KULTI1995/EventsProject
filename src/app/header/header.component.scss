@@ -1,0 +1,17 @@
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.userDisplay{
+  display:flex;
+
+  img{
+    transform: translate(0.8rem);
+    z-index: 1;
+    border-radius: 50%;
+    height:40px;
+    width:auto;
+  }
+}

@@ -1,0 +1,23 @@
+.card {
+  cursor:pointer;
+  max-width: 300px;
+  font-size:0.7rem;
+}
+
+.extras{
+  display:flex; flex-flow:column; position:absolute; top:1em; right:1em; color:#333738;
+  div{
+    display:inline-flex;
+    *{
+      align-self:center;
+    }
+  }
+}
+
+img {
+  transition: opacity 1s;
+  opacity: 0;
+  &.ng-lazyloaded {
+    opacity: 1;
+  }
+}

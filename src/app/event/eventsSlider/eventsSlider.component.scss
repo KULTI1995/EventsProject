@@ -1,0 +1,11 @@
+.event-slider{
+  margin-bottom:1em;
+
+  & > .toolbar{
+    background:none;
+  }
+
+  .carousel-cell:not(.is-selected){
+    opacity:0.5;
+  }
+}

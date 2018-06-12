@@ -1,0 +1,4 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%">
+     <app-eventDisplay fxLayoutAlign="stretch" *ngFor="let event of eventsservice.allEvents | async" [event]="event"></app-eventDisplay>
+</div>
+<!-- <app-eventsSlider></app-eventsSlider> -->
