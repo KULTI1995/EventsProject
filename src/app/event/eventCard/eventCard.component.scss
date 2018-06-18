@@ -4,6 +4,16 @@
   font-size: 0.7rem;
 }
 
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.mat-card-subtitle{
+margin-top:0!important;
+}
+
 .extras {
   display: flex;
   flex-flow: column;
@@ -25,5 +35,11 @@ ngb-carousel {
   padding:0;
   img {
     width: 100%;
+  }
+}
+
+mat-card-content::ng-deep{
+  img{
+    max-width: 100%;
   }
 }

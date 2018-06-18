@@ -1,0 +1,19 @@
+<div *ngIf="filters['category'] || filters['title'] || filters['distance'] || filters['time']" fxLayout="row" fxLayoutAlign="start end">
+    <span>filters:</span>
+    <div fxLayout="row" fxLayoutAlign="center" matTooltip="category" *ngIf="filters['category']">
+        <mat-icon>category</mat-icon>
+        {{ filters['category'] }}
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center" matTooltip="title" *ngIf="filters['title']">
+            <mat-icon>title</mat-icon>
+        {{ filters['title'] }}
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center" matTooltip="distance" *ngIf="filters['distance']">
+            <mat-icon>filter_tilt_shift</mat-icon>
+        {{ filters['distance'] }}km
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center" matTooltip="time" *ngIf="filters['time']">
+        <mat-icon>today</mat-icon>
+        {{ filters['time'] }}
+    </div>
+</div>

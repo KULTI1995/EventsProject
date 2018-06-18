@@ -1,16 +1,8 @@
-<div class="event-slider">
-  <mat-toolbar class="toolbar">
-    <span>Category XYZ</span>
+<div *ngIf="(events | async) != false" class="event-slider">
+  <mat-toolbar class="toolbar"> 
+    <span>{{ category }}</span>
   </mat-toolbar>
-  <div class="carousel" data-flickity='{"groupCells": true }'>
-      <app-eventDisplay class="carousel-cell"></app-eventDisplay>
-      <app-eventDisplay class="carousel-cell"></app-eventDisplay>
-      <app-eventDisplay class="carousel-cell"></app-eventDisplay>
-      <app-eventDisplay class="carousel-cell"></app-eventDisplay>
-      <app-eventDisplay class="carousel-cell"></app-eventDisplay>
-      <app-eventDisplay class="carousel-cell"></app-eventDisplay>
-      <app-eventDisplay class="carousel-cell"></app-eventDisplay>
-      <app-eventDisplay class="carousel-cell"></app-eventDisplay>
-      <app-redirectCard class="carousel-cell"></app-redirectCard>
-  </div>
+  <swiper class="container" [config]="config">
+    <app-eventDisplay *ngFor="let event of (events | async)" [event]="event"></app-eventDisplay>
+  </swiper>
 </div>

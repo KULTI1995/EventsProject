@@ -1,0 +1,23 @@
+[_nghost-c5] {
+    display: inline-block !important;
+    width: 100%;
+}
+
+.mat-tab-link-active,
+.mat-tab-label-active {
+    background-color: #EAECF5;
+    // color: #D5FEFF;
+    // border: 1px solid #6B7F7F;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 2px solid #3F51B5;
+}
+
+.mat-tab-link,
+.mat-tab-label {
+    text-decoration: none!important;
+}
+
+#mat-badge-content-0 {
+    right: 0!important;
+}

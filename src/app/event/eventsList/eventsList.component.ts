@@ -1,34 +1,37 @@
-import {EventService} from '../../services/event.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DragScrollDirective } from 'ngx-drag-scroll';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { EventService } from '../../shared/services/event.service';
 
 @Component({
-  selector: 'app-eventsList',
-  templateUrl: './eventsList.component.html',
-  styleUrls: ['./eventsList.component.scss']
+    selector: 'app-eventsList',
+    templateUrl: './eventsList.component.html',
+    styleUrls: ['./eventsList.component.scss']
 })
 export class EventsListComponent implements OnInit {
-  @ViewChild('nav', {read: DragScrollDirective}) ds: DragScrollDirective;
-  leftNavDisabled = false;
-  rightNavDisabled = false;
-  constructor(public eventsservice: EventService) { }
+    routeLinks: any[];
+    activeLinkIndex = -1;
+    getEventsFilter;
+    constructor(private router: Router, public eventsservice: EventService) {
+        this.getEventsFilter = this.eventsservice.getEventsFilter();
+        this.eventsservice.$filtersChange.subscribe(() => {
+            this.getEventsFilter = this.eventsservice.getEventsFilter();
+        });
+        this.routeLinks = [
+            {
+                label: 'Main page',
+                link: '/',
+                index: 0
+            }, {
+                label: 'Filtered events',
+                link: '/filtered',
+                index: 1
+            }
+        ];
+    }
 
-  ngOnInit() {
-  }
-
-  moveLeft() {
-    this.ds.moveLeft();
-  }
-
-  moveRight() {
-    this.ds.moveRight();
-  }
-
-  leftBoundStat(reachesLeftBound: boolean) {
-    this.leftNavDisabled = reachesLeftBound;
-  }
-
-  rightBoundStat(reachesRightBound: boolean) {
-    this.rightNavDisabled = reachesRightBound;
-}
+    ngOnInit(): void {
+        this.router.events.subscribe((res) => {
+            this.activeLinkIndex = this.routeLinks.indexOf(this.routeLinks.find(tab => tab.link === '.' + this.router.url));
+        });
+    }
 }

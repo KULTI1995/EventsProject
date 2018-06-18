@@ -1,8 +1,8 @@
-import { Component, Input, AfterContentInit, OnChanges, ChangeDetectionStrategy } from '@angular/core';
-import { Location } from '@angular/common';
-import { LocationService } from '../../services/location.service';
-import { Event } from '../event.interface';
+import { Component, Input, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { EventClass } from '../EventClass';
+import { switchMap } from 'rxjs/operators';
+import { BehaviorSubject, of } from 'rxjs';
+import { LocationService } from '../../shared/services/location.service';
 
 @Component({
   selector: 'app-eventDisplay',
@@ -10,19 +10,36 @@ import { EventClass } from '../EventClass';
   styleUrls: ['./eventDisplay.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventDisplayComponent {
+export class EventDisplayComponent implements OnInit{
   @Input() event: EventClass;
-  distanceToEvent = 0;
-  constructor(public locationservice: LocationService) {}
+  $getDistance = new BehaviorSubject(0);
+  constructor(private locationservice: LocationService) {}
+  
+  ngOnInit(): void {
+    this.getDistance();
+  }
 
   getDistance() {
-    let distance = 0;
-    this.locationservice.$location.subscribe(location => {
-      if (location) {
-        distance = this.event.distanceMeter(location.lat, location.lng);
-      }
-    });
-    return distance;
+    this.locationservice.$location.pipe(
+      switchMap(location => {
+        if(location===null){
+          return of(0);
+        } else{
+          return of(this.event.distanceMeter(location.lat, location.lng));
+        }
+      })
+    ).subscribe((distance)=>{
+      this.$getDistance.next(distance);
+    })
+  }
+
+  timeColor(TimetoEvent:number){
+    if(TimetoEvent>5){
+      return 'firebrick';
+    } else if(TimetoEvent<=5 && TimetoEvent>0){
+      return 'green';
+    }
+    return 'gray';
   }
 
   getDayCountToEvent() {

@@ -1,0 +1,20 @@
+.card{
+    margin-bottom:10px;
+}
+
+.filterMainDiv{
+    @media screen and (max-width: 959px) {
+        div{
+            width: 100%;
+        }
+      }
+}
+
+.disablefilter{
+    position: absolute;
+    bottom:0;
+    right:0;
+    mat-icon{
+        transform:rotate(180deg);
+    }
+}

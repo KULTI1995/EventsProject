@@ -1,0 +1,3 @@
+<swiper class="container" [config]="config">
+    <app-eventDisplay *ngFor="let event of (getEventsFilter | async)" [event]="event"></app-eventDisplay>
+</swiper>

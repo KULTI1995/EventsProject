@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { SiteHelperService } from '../services/siteHelper.service';
-import { EventService } from '../services/event.service';
+import { AuthService } from '../shared/services/auth.service';
+import { SiteHelperService } from '../shared/services/siteHelper.service';
+import { EventService } from '../shared/services/event.service';
 
 @Component({
   selector: 'app-header',

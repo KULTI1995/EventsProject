@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormBuilder,
   FormGroup,
-  Validators,
   FormControl,
   FormArray
 } from '@angular/forms';
-import { SiteHelperService } from '../../services/siteHelper.service';
-import { EventService } from '../../services/event.service';
 import { FileHolder } from 'angular2-image-upload';
-import { Event } from '../../event/event.interface';
+import { Event } from '../../shared/interface/event.interface';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { EventService } from '../../shared/services/event.service';
+import { SiteHelperService } from '../../shared/services/siteHelper.service';
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'app-addEvent',

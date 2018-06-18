@@ -9,10 +9,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { GenerateShortComponent } from './addEvent/generateShort/generateShort.component';
 import { LocationComponent } from './addEvent/location/location.component';
-import { EventService } from '../services/event.service';
 import { ImageUploadModule } from 'angular2-image-upload';
 import { SummaryComponent } from './addEvent/summary/summary.component';
 import { MyEventsListComponent } from './myEventsList/myEventsList.component';
+import { EventService } from '../shared/services/event.service';
 
 @NgModule({
   imports: [

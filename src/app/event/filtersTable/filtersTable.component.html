@@ -1,0 +1,59 @@
+<mat-card class="card">
+  <mat-card-content>
+    <span class="filterMainDiv" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="space-evenly center">
+      <div fxLayoutAlign="center" fxLayout="column" >
+        <mat-toolbar class="toolbar" fxLayoutAlign="center center">
+          <span>Category filter</span>
+        </mat-toolbar>
+        <mat-form-field>
+          <mat-select #selectCategory placeholder="Category filter" (valueChange)="changeFilters()" [(ngModel)]="filters['category']"
+            name="category">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let category of categories" [value]="category">
+              {{category}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div xLayoutAlign="center" fxLayout="column">
+        <mat-toolbar class="toolbar" fxLayoutAlign="center center">
+          <span>radius from events</span>
+        </mat-toolbar>
+        <mat-slider (change)="changeFilters()" [(ngModel)]="filters['distance']" thumbLabel [displayWith]="formatLabel" tickInterval="1"
+          min="0" max="99"></mat-slider>
+      </div>
+
+      <div xLayoutAlign="center" fxLayout="column">
+        <mat-toolbar class="toolbar" fxLayoutAlign="center center">
+          <span>Time filter</span>
+        </mat-toolbar>
+        <mat-form-field>
+          <mat-select #selectCategory placeholder="Time filter" (valueChange)="changeFilters()" [(ngModel)]="filters['time']" name="time">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let time of times" [value]="time.timeString">
+              {{time.caption}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div xLayoutAlign="center" fxLayout="column">
+        <mat-toolbar class="toolbar" fxLayoutAlign="center center">
+          <span>search by title</span>
+        </mat-toolbar>
+        <mat-form-field class="example-full-width">
+          <input #input matTooltip="* enter * to search" [matTooltipShowDelay]="300" autocomplete="off" (change)="changeFilters()"
+            [(ngModel)]="filters['title']" matInput placeholder="Name of event">
+          <button matSuffix mat-icon-button mat-button matTooltip="delete" matTooltipPosition="below" (click)="deleteTitleInput(input)">
+            <mat-icon aria-label="delete title">cancel</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </span>
+  </mat-card-content>
+  <app-listOfFilters [filters]="filters"></app-listOfFilters>
+
+  <button (click)="clearAllFilters()" matTooltip="clear all filters" class="disablefilter" mat-icon-button>
+    <mat-icon aria-label="clear all filters">redo</mat-icon>
+  </button>
+</mat-card>

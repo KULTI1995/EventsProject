@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { SiteHelperService } from '../services/siteHelper.service';
-import { EventService } from '../services/event.service';
-import { PageLocation } from '../services/PageLocation.enum';
 import { Router } from '@angular/router';
+import { PageLocation } from '../shared/services/PageLocation.enum';
+import { EventService } from '../shared/services/event.service';
+import { SiteHelperService } from '../shared/services/siteHelper.service';
 
 @Component({
   selector: 'app-account',

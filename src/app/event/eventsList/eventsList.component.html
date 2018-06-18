@@ -1,4 +1,16 @@
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%">
-     <app-eventDisplay fxLayoutAlign="stretch" *ngFor="let event of eventsservice.allEvents | async" [event]="event"></app-eventDisplay>
+<div style="padding: 5px;">
+    <nav fxLayoutAlign="center center" mat-tab-nav-bar>
+        <a mat-tab-link *ngFor="let routeLink of routeLinks; let i = index;" [routerLink]="routeLink.link" routerLinkActive="mat-tab-link-active"
+            #rla="routerLinkActive" [active]="activeLinkIndex === i" (click)="activeLinkIndex = i" [routerLinkActiveOptions]="{exact: true}">
+            <span *ngIf="i===1; else withoutBadge" [matBadge]="(getEventsFilter | async)?.length" [matBadgeHidden]="!(getEventsFilter | async)?.length">
+                {{routeLink.label}}
+            </span>
+            <ng-template #withoutBadge>
+                    {{routeLink.label}}
+            </ng-template>
+
+        </a>
+    </nav>
+    <app-filtersTable></app-filtersTable>
+    <router-outlet></router-outlet>
 </div>
-<!-- <app-eventsSlider></app-eventsSlider> -->

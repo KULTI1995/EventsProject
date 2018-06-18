@@ -9,17 +9,17 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
-import { AuthService } from './services/auth.service';
 import { MaterialModule } from './material.module';
-import { AuthGuard } from './guards/auth.guard';
 import { HeaderComponent } from './header/header.component';
-import { SiteHelperService } from './services/siteHelper.service';
-import { EventService } from './services/event.service';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { LocationService } from './services/location.service';
+import { ReactiveFormsModule} from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { AuthService } from './shared/services/auth.service';
+import { SiteHelperService } from './shared/services/siteHelper.service';
+import { LocationService } from './shared/services/location.service';
+import { EventService } from './shared/services/event.service';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -34,10 +34,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     MaterialModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBPp9Trq6KqZh8BK-7Q0Zc_mpzIyqJDalo',
-      libraries: ['places']
-    }),
+    AgmCoreModule.forRoot(environment.maps),
     FlexLayoutModule,
     NgbModule.forRoot()
   ],

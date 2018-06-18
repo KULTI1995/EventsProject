@@ -1,7 +1,14 @@
 .card {
   cursor:pointer;
   max-width: 300px;
+  @media screen and (max-width: 500px) {
+    max-width: 100%;
+  }
   font-size:0.7rem;
+  min-height:350px;
+  mat-card-header{
+    padding-right: 70px;
+  }
 }
 
 .extras{
@@ -14,10 +21,10 @@
   }
 }
 
-img {
-  transition: opacity 1s;
-  opacity: 0;
-  &.ng-lazyloaded {
-    opacity: 1;
-  }
-}
+// img {
+//   transition: opacity 1s;
+//   opacity: 0;
+//   &.ng-lazyloaded {
+//     opacity: 1;
+//   }
+// }

@@ -1,16 +1,47 @@
 <mat-card *ngIf="event" class="card">
+  <app-addToFavorites [event]=event style="position:absolute; top:0; left:0;"></app-addToFavorites>
   <mat-card-header>
-    <mat-card-title>{{ event.title }}</mat-card-title>
-    <mat-card-subtitle>{{ event.category }}</mat-card-subtitle>
+    <div>
+      <mat-card-title>{{ event.title }}</mat-card-title>
+      <mat-card-subtitle>{{ event.category }}</mat-card-subtitle>
+    </div>
+    <span *ngIf="!(this.sitehelper.isHandset$ | async)" class="fill-remaining-space"></span>
+    <div fxLayoutAlign="start start" fxLayout="column">
+      <div fxLayoutAlign="center start" fxLayout="row">
+        <mat-card-title>Date from:</mat-card-title>
+        <mat-card-subtitle>
+          {{ event.date.start | date}}
+        </mat-card-subtitle>
+        <div fxLayout="row" [style.color]="getDayCountToEvent()>5?'firebrick':'green'">
+          <mat-icon fxFlexAlign="center">today</mat-icon>
+          <div fxFlexAlign="center">{{ getDayCountToEvent() }}</div>
+        </div>
+      </div>
+      <div fxLayoutAlign="center start" fxLayout="row">
+        <mat-card-title>Date to:</mat-card-title>
+        <mat-card-subtitle>{{ event.date.end | date}}</mat-card-subtitle>
+      </div>
+      <div fxLayoutAlign="center start" fxLayout="row">
+        <mat-card-title>Where:</mat-card-title>
+        <mat-card-subtitle>{{ event.location.city }}</mat-card-subtitle>
+        <div fxLayout="row">
+          <mat-icon fxFlexAlign="center">home</mat-icon>
+          <div fxFlexAlign="center">{{($getDistance | async) | number:'1.1-1'}}km</div>
+        </div>
+      </div>
+    </div>
   </mat-card-header>
-<div *ngIf="event.images.length>1; else ontImage">
-  <ngb-carousel>
-    <ng-template *ngFor="let image of event.images" ngbSlide  >
-      <img [src]="image" alt="{{image}}">
-    </ng-template>
-  </ngb-carousel>
-</div>
-  <ng-template #ontImage><img mat-card-image [lazyLoad]="event.images[0]" alt="First image of event"></ng-template>
+
+  <div *ngIf="event.images.length>1; else ontImage">
+    <ngb-carousel>
+      <ng-template *ngFor="let image of event.images" ngbSlide>
+        <img [src]="image" alt="{{image}}">
+      </ng-template>
+    </ngb-carousel>
+  </div>
+  <ng-template #ontImage>
+    <img mat-card-image [lazyLoad]="event.images[0]" alt="First image of event">
+  </ng-template>
   <mat-card-content>
     <p style="max-width:100%;" [innerHTML]="assembleHTMLItem()"> </p>
   </mat-card-content>

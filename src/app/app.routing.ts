@@ -1,17 +1,15 @@
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard';
-import { EventModule } from './event/event.module';
-import { AccountModule } from './account/account.module';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => EventModule
+    loadChildren: 'app/event/event.module#EventModule'
   },
   {
     path: 'account',
-    loadChildren: () => AccountModule,
-    // canLoad: [AuthGuard]
+    loadChildren: 'app/account/account.module#AccountModule',
+    canLoad: [AuthGuard]
   },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

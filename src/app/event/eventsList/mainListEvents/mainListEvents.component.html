@@ -1,0 +1,19 @@
+<div *ngIf="ElementsInLocalStorage">
+  <mat-toolbar class="toolbar" fxLayoutAlign="center center">
+    <span>Added to favorites.</span>
+  </mat-toolbar>
+  <swiper class="container" [config]="config">
+    <div *ngFor="let event of eventsservice.EventsFromLocalStorage | async">
+      <app-eventDisplay [event]="event"></app-eventDisplay>
+    </div>
+  </swiper>
+</div>
+
+<div *ngIf="eventsservice.categoriesArray">
+  <mat-toolbar class="toolbar" fxLayoutAlign="center center">
+    <span>display by categories</span>
+  </mat-toolbar>
+  <div *ngFor="let category of eventsservice.categoriesArray">
+    <app-eventsSlider [config]=config [category]=category></app-eventsSlider>
+  </div>
+</div>

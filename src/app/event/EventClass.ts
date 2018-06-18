@@ -1,4 +1,4 @@
-import { Event } from './event.interface';
+import { Event } from '../shared/interface/event.interface';
 
 export class EventClass {
   key: string;
